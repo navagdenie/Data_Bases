@@ -1,6 +1,6 @@
 CREATE DATABASE example;
 USE example;
 CREATE TABLE users (
-	id INT
-	name CHAR(50)
+	id SERIAL PRIMARY KEY,
+	name CHAR(50) NOT NULL
 	);
