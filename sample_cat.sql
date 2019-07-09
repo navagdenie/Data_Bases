@@ -1,1 +1,2 @@
--- Пока не готово, в процессе
+REPLACE INTO sample.cat (id, name)
+SELECT id, name FROM shop.catalogs;
