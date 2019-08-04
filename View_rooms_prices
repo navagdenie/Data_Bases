@@ -1,0 +1,13 @@
+CREATE VIEW rooms_prices AS
+SELECT 
+	h.name hotel,
+	r.name room,
+	nt.name nutricion,
+	bt.name,
+	r.capacity,
+	p.price
+FROM prices p
+	JOIN rooms r ON p.room_id = r.id
+	JOIN hotels h ON r.hotel_id = h.id
+	JOIN bed_types bt ON r.bed_type_id = bt.id
+	JOIN nutricion_types nt ON p.nutricion_type_id = nt.id
