@@ -12,8 +12,8 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-DROP TABLE IF EXISTS `nutricion_types`;
-CREATE TABLE `nutricion_types` (
+DROP TABLE IF EXISTS `nutrition_types`;
+CREATE TABLE `nutrition_types` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Название',
   `created_at` datetime DEFAULT current_timestamp() COMMENT 'Время и дата добавления записи',
@@ -21,7 +21,7 @@ CREATE TABLE `nutricion_types` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Типы питания';
 
-INSERT INTO `nutricion_types` VALUES ('1','Breakfast included','2003-05-05 05:03:10','1988-07-01 19:31:10'),
+INSERT INTO `nutrition_types` VALUES ('1','Breakfast included','2003-05-05 05:03:10','1988-07-01 19:31:10'),
 ('2','All meals included','1990-09-27 08:28:03','1976-10-06 08:10:50'),
 ('3','All-inclusive','1987-03-17 09:41:44','1979-06-19 13:12:09'),
 ('4','Breakfast & lunch included','1973-12-30 09:33:44','1999-03-06 17:56:46'),
