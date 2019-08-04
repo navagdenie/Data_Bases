@@ -226,30 +226,30 @@ DROP TABLE IF EXISTS prices;
 
 CREATE TABLE IF NOT EXISTS prices (
 room_id BIGINT UNSIGNED NOT NULL COMMENT "Номер",
-nutricion_type_id BIGINT UNSIGNED NOT NULL COMMENT "Тип питания",
+nutrition_type_id BIGINT UNSIGNED NOT NULL COMMENT "Тип питания",
 price DECIMAL(15,2) UNSIGNED NOT NULL COMMENT "Цена",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи",
-PRIMARY KEY(room_id, nutricion_type_id),
+PRIMARY KEY(room_id, nutrition_type_id),
 CONSTRAINT prices_room_id_fk FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE ON UPDATE NO ACTION,
-CONSTRAINT prices_nutricion_type_id_fk FOREIGN KEY (nutricion_type_id) REFERENCES nutrition_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-INDEX prices_room_id_nutricion_type_id_idx(room_id, nutricion_type_id)
+CONSTRAINT prices_nutritiontion_type_id_fk FOREIGN KEY (nutrition_type_id) REFERENCES nutrition_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+INDEX prices_room_id_nutrition_type_id_idx(room_id, nutrition_type_id)
 ) COMMENT = "Цены";
 
 DROP TABLE IF EXISTS seasonal_margins;
 
 CREATE TABLE IF NOT EXISTS seasonal_margins (
 room_id BIGINT UNSIGNED NOT NULL COMMENT "Номер",
-nutricion_type_id BIGINT UNSIGNED NOT NULL COMMENT "Тип питания",
+nutrition_type_id BIGINT UNSIGNED NOT NULL COMMENT "Тип питания",
 date_from DATE NOT NULL COMMENT "Дата начала действия",
 date_to DATE NOT NULL COMMENT "Дата окончания действия",
 margin TINYINT UNSIGNED NOT NULL COMMENT "Процент наценки (0%-250%)",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи",
-PRIMARY KEY(room_id, nutricion_type_id, date_from),
+PRIMARY KEY(room_id, nutrition_type_id, date_from),
 CONSTRAINT seasonal_margins_room_id_fk FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE ON UPDATE NO ACTION,
-CONSTRAINT seasonal_margins_nutricion_type_id_fk FOREIGN KEY (nutricion_type_id) REFERENCES nutrition_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
-INDEX seasonal_margins_room_id_nutricion_type_id_idx(room_id, nutricion_type_id)
+CONSTRAINT seasonal_margins_nutrition_type_id_fk FOREIGN KEY (nutrition_type_id) REFERENCES nutrition_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+INDEX seasonal_margins_room_id_nutrition_type_id_idx(room_id, nutrition_type_id)
 ) COMMENT = "Сезонные наценки";
 
 DROP TABLE IF EXISTS users;
@@ -323,7 +323,7 @@ CREATE TABLE IF NOT EXISTS bookings (
 id SERIAL COMMENT "Номер бронирования",
 room_id BIGINT UNSIGNED NOT NULL COMMENT "Номер",
 user_id BIGINT UNSIGNED NOT NULL COMMENT "Пользователь",
-nutricion_type_id BIGINT UNSIGNED NOT NULL COMMENT "Тип питания",
+nutrition_type_id BIGINT UNSIGNED NOT NULL COMMENT "Тип питания",
 date_from DATE NOT NULL COMMENT "Дата начала бронирования",
 date_to DATE NOT NULL COMMENT "Дата окончания бронирования",
 days INT UNSIGNED NOT NULL COMMENT "Количество дней",
@@ -333,7 +333,7 @@ updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMEN
 PRIMARY KEY (room_id, date_from),
 CONSTRAINT bookings_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT bookings_room_id_fk FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT bookings_nutricion_type_id_fk FOREIGN KEY (nutricion_type_id) REFERENCES nutrition_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT bookings_nutrition_type_id_fk FOREIGN KEY (nutrition_type_id) REFERENCES nutrition_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
 INDEX bookings_room_id_date_from_date_to_idx(room_id, date_from, date_to),
 INDEX bookings_user_id_idx(user_id),
 INDEX bookings_user_id_room_id_idx(user_id, room_id)
