@@ -1,0 +1,41 @@
+-- Generation time: Sat, 03 Aug 2019 13:27:24 +0000
+-- Host: mysql.hostinger.ro
+-- DB name: u574849695_23
+/*!40030 SET NAMES UTF8 */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+DROP TABLE IF EXISTS `nutricion_types`;
+CREATE TABLE `nutricion_types` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Название',
+  `created_at` datetime DEFAULT current_timestamp() COMMENT 'Время и дата добавления записи',
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'Время и дата последнего изменения записи',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Типы питания';
+
+INSERT INTO `nutricion_types` VALUES ('1','Breakfast included','2003-05-05 05:03:10','1988-07-01 19:31:10'),
+('2','All meals included','1990-09-27 08:28:03','1976-10-06 08:10:50'),
+('3','All-inclusive','1987-03-17 09:41:44','1979-06-19 13:12:09'),
+('4','Breakfast & lunch included','1973-12-30 09:33:44','1999-03-06 17:56:46'),
+('5','Breakfast & dinner included','1988-12-06 14:02:08','2013-11-26 05:59:37'),
+('6','Self catering','2001-07-02 09:51:22','1973-11-19 09:15:12'); 
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+

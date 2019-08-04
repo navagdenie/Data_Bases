@@ -1,0 +1,50 @@
+-- Generation time: Sat, 03 Aug 2019 13:13:47 +0000
+-- Host: mysql.hostinger.ro
+-- DB name: u574849695_23
+/*!40030 SET NAMES UTF8 */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+DROP TABLE IF EXISTS `hotel_types`;
+CREATE TABLE `hotel_types` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Название',
+  `created_at` datetime DEFAULT current_timestamp() COMMENT 'Время и дата добавления записи',
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'Время и дата последнего изменения записи',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Типы отелей';
+
+INSERT INTO `hotel_types` VALUES ('1','Hotels','1995-04-12 15:23:33','2010-10-25 01:51:29'),
+('2','Apartments','2016-03-08 21:03:41','1990-11-22 11:48:31'),
+('3','Hostels','2002-08-24 23:48:24','1989-12-29 04:44:56'),
+('4','Guest houses','1988-11-23 16:03:02','1998-03-03 03:05:16'),
+('5','Homestays','2008-06-01 22:25:10','1994-05-04 23:03:37'),
+('6','Capsule hotels','1996-01-03 07:16:24','1972-10-03 13:15:46'),
+('7','Bed and breakfast','2006-06-11 21:07:19','2000-04-18 15:04:05'),
+('8','Holiday homes','1975-10-08 01:08:19','1987-11-15 00:51:33'),
+('9','Love hotels','2005-10-08 11:35:10','2018-12-15 19:23:57'),
+('10','Country houses','1972-09-19 09:33:24','2015-11-20 00:42:05'),
+('11','Motels','1973-12-09 15:15:19','1987-10-04 14:58:52'),
+('12','Holiday parks','2019-07-19 13:42:38','2008-08-28 23:35:15'),
+('13','Economy hotels','1999-10-22 10:02:45','1978-11-26 10:38:52'),
+('14','Luxury tents','2017-01-18 15:48:32','1988-10-17 14:27:21'),
+('15','Health resorts','2015-05-31 10:39:57','1972-06-08 03:53:09'); 
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
