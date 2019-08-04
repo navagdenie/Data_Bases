@@ -1,13 +1,8 @@
-/*База данных на основе сайта booking.ru
-Содержит в себе информацию о отелях, удобствах и услугах отелей,
-ползователях, их бронированиях и отзвах о бронированияхю
-Также включена небольшая программа лояльности в виде накопительных скидок*/
-
 DROP TABLE IF EXISTS countries;
 
 CREATE TABLE IF NOT EXISTS countries (
 id SERIAL PRIMARY KEY,
-name VARCHAR(255) NOT NULL COMMENT "Название страны",
+name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название страны",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи"
 
@@ -28,7 +23,7 @@ DROP TABLE IF EXISTS hotel_types;
 
 CREATE TABLE IF NOT EXISTS hotel_types (
 id SERIAL PRIMARY KEY,
-name VARCHAR(255) NOT NULL COMMENT "Название",
+name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи"
 
@@ -72,7 +67,7 @@ DROP TABLE IF EXISTS media_types;
 
 CREATE TABLE IF NOT EXISTS media_types (
 id SERIAL PRIMARY KEY,
-media_type VARCHAR(10) NOT NULL COMMENT "Название типа",
+media_type VARCHAR(10) NOT NULL UNIQUE COMMENT "Название типа",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи"
 ) COMMENT = "Типы медиа файлов";
@@ -139,7 +134,7 @@ DROP TABLE IF EXISTS facilities_categories;
 
 CREATE TABLE IF NOT EXISTS facilities_categories (
 id SERIAL PRIMARY KEY,
-name VARCHAR(255) NOT NULL COMMENT "Название категории",
+name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название категории",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи"
 ) COMMENT = "Категории удобств";
@@ -173,7 +168,7 @@ DROP TABLE IF EXISTS languages;
 
 CREATE TABLE IF NOT EXISTS languages (
 id SERIAL PRIMARY KEY,
-name VARCHAR(255) NOT NULL COMMENT "Название языка",
+name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название языка",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи"
 ) COMMENT = "Иностранные языки";
@@ -192,11 +187,11 @@ INDEX hotel_languages_hotel_id_idx(hotel_id),
 INDEX hotel_languages_language_id_idx(language_id)
 ) COMMENT = "Иностранные языки отелей/пользователей";
 
-DROP TABLE IF EXISTS nutricion_types;
+DROP TABLE IF EXISTS nutrition_types;
 
-CREATE TABLE IF NOT EXISTS nutricion_types (
+CREATE TABLE IF NOT EXISTS nutrition_types (
 id SERIAL PRIMARY KEY,
-name VARCHAR(255) NOT NULL COMMENT "Название",
+name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи"
 ) COMMENT = "Типы питания";
@@ -205,7 +200,7 @@ DROP TABLE IF EXISTS bed_types;
 
 CREATE TABLE IF NOT EXISTS bed_types (
 id SERIAL PRIMARY KEY,
-name VARCHAR(255) NOT NULL COMMENT "Название",
+name VARCHAR(255) NOT NULL UNIQUE COMMENT "Название",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи"
 ) COMMENT = "Типы кроватей";
@@ -237,7 +232,7 @@ created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата д
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи",
 PRIMARY KEY(room_id, nutricion_type_id),
 CONSTRAINT prices_room_id_fk FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE ON UPDATE NO ACTION,
-CONSTRAINT prices_nutricion_type_id_fk FOREIGN KEY (nutricion_type_id) REFERENCES nutricion_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT prices_nutricion_type_id_fk FOREIGN KEY (nutricion_type_id) REFERENCES nutrition_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
 INDEX prices_room_id_nutricion_type_id_idx(room_id, nutricion_type_id)
 ) COMMENT = "Цены";
 
@@ -253,7 +248,7 @@ created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата д
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи",
 PRIMARY KEY(room_id, nutricion_type_id, date_from),
 CONSTRAINT seasonal_margins_room_id_fk FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE ON UPDATE NO ACTION,
-CONSTRAINT seasonal_margins_nutricion_type_id_fk FOREIGN KEY (nutricion_type_id) REFERENCES nutricion_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT seasonal_margins_nutricion_type_id_fk FOREIGN KEY (nutricion_type_id) REFERENCES nutrition_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
 INDEX seasonal_margins_room_id_nutricion_type_id_idx(room_id, nutricion_type_id)
 ) COMMENT = "Сезонные наценки";
 
@@ -283,14 +278,14 @@ country_id BIGINT UNSIGNED NOT NULL COMMENT "Страна проживания",
 city_id BIGINT UNSIGNED NOT NULL COMMENT "Город проживания",
 firstname VARCHAR(255) NOT NULL COMMENT "Имя (для оформления документов)",
 lastname VARCHAR(255) NOT NULL COMMENT "Фамилия (для оформления документов)",
-mailing BOOLEAN COMMENT "Получатель рассылки",
-sms BOOLEAN COMMENT "Получатель смс-рассылки",
+mailing_accepted BOOLEAN COMMENT "Получатель рассылки",
+sms_accepted BOOLEAN COMMENT "Получатель смс-рассылки",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи",
 CONSTRAINT profiles_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE NO ACTION,
 INDEX profiles_user_id_index(user_id),
-INDEX profiles_mailing_index(mailing),
-INDEX profiles_sms_index(sms),
+INDEX profiles_mailing_index(mailing_accepted),
+INDEX profiles_sms_index(sms_accepted),
 INDEX profiles_country_id_index(country_id),
 INDEX profiles_city_id_index(city_id)
 ) COMMENT = "Профили пользователей";
@@ -299,7 +294,7 @@ DROP TABLE IF EXISTS card_types;
 
 CREATE TABLE IF NOT EXISTS card_types (
 id SERIAL PRIMARY KEY,
-name VARCHAR(50) NOT NULL COMMENT "Название",
+name VARCHAR(50) NOT NULL UNIQUE COMMENT "Название",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи"
 ) COMMENT = "Типы платежных карт";
@@ -338,7 +333,7 @@ updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMEN
 PRIMARY KEY (room_id, date_from),
 CONSTRAINT bookings_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT bookings_room_id_fk FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT bookings_nutricion_type_id_fk FOREIGN KEY (nutricion_type_id) REFERENCES nutricion_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT bookings_nutricion_type_id_fk FOREIGN KEY (nutricion_type_id) REFERENCES nutrition_types(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
 INDEX bookings_room_id_date_from_date_to_idx(room_id, date_from, date_to),
 INDEX bookings_user_id_idx(user_id),
 INDEX bookings_user_id_room_id_idx(user_id, room_id)
@@ -372,7 +367,7 @@ DROP TABLE IF EXISTS discount_types;
 
 CREATE TABLE IF NOT EXISTS discount_types (
 id SERIAL PRIMARY KEY,
-orders_amount DECIMAL(15,2) UNSIGNED NOT NULL COMMENT "Сумма заказов",
+orders_amount DECIMAL(15,2) UNSIGNED NOT NULL UNIQUE COMMENT "Сумма заказов",
 discount_percent INT UNSIGNED NOT NULL COMMENT "Процент скидки",
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT "Время и дата добавления записи",
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "Время и дата последнего изменения записи",
